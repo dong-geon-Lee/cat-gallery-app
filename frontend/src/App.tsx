@@ -4,7 +4,6 @@ import { catItemState } from "./atoms/catItemState";
 import { useRecoilState } from "recoil";
 import { catDataProps } from "./@types/types";
 
-// axios.defaults.withCredentials = true;
 const App: React.FC = () => {
   const [catItems, setCatItems] = useRecoilState<catDataProps[]>(catItemState);
 
@@ -27,7 +26,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {catItems.map((catItem) => (
+      {catItems?.map((catItem) => (
         <div key={catItem._id}>
           <img src={catItem.image} />
           <h2>{catItem.breeds}</h2>
