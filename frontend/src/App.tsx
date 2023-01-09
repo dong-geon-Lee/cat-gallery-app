@@ -92,7 +92,6 @@ export const Button = styled.button`
   font-size: 1.8rem;
   background-color: #fff;
   display: block;
-  /* width: 60%; */
 
   &:hover {
     opacity: 0.8;
@@ -124,28 +123,28 @@ export const Box = styled.div`
 `;
 
 const App: React.FC = () => {
-  const image = useRef<HTMLInputElement>(null);
-  const breeds = useRef<HTMLInputElement>(null);
-  const age = useRef<HTMLInputElement>(null);
-  const name = useRef<HTMLInputElement>(null);
-  const description = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
+  const breedsRef = useRef<HTMLInputElement>(null);
+  const ageRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLInputElement>(null);
 
   const { isLoading, isError, error, data } = useQuery<catProps[], Error>(
     "cats",
     fetchCatData
   );
 
-  const catItems = useRecoilValue(catItemState);
-  const setCatItems = useSetRecoilState(catItemState);
+  // const catItems = useRecoilValue(catItemState);
+  // const setCatItems = useSetRecoilState(catItemState);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const imageInput = image.current?.files?.[0];
-    const breedsInput = breeds.current?.value;
-    const ageInput = age.current?.value;
-    const nameInput = name.current?.value;
-    const descriptionInput = description.current?.value;
+    const imageInput = imageRef.current?.files?.[0];
+    const breedsInput = breedsRef.current?.value;
+    const ageInput = ageRef.current?.value;
+    const nameInput = nameRef.current?.value;
+    const descriptionInput = descriptionRef.current?.value;
 
     const formData: any = new FormData();
 
@@ -155,9 +154,19 @@ const App: React.FC = () => {
     formData.append("name", nameInput);
     formData.append("description", descriptionInput);
 
-    console.log(formData.get("image"));
+    const image = formData.get("image");
+    const breeds = formData.get("breeds");
+    const age = formData.get("age");
+    const name = formData.get("name");
+    const description = formData.get("description");
 
-    addCatData(formData);
+    addCatData({
+      image,
+      breeds,
+      age,
+      name,
+      description,
+    });
   };
 
   const handleClick = (e: React.FormEvent) => {
@@ -169,12 +178,6 @@ const App: React.FC = () => {
 
   console.log(data);
 
-  //   breeds: { type: String, required: true },
-  // age: { type: Number, required: true },
-  // name: { type: String, required: true },
-  // description: { type: String, required: true },
-  // image: { type: String, required: true },
-
   return (
     <Container>
       <Wrapper>
@@ -183,23 +186,23 @@ const App: React.FC = () => {
           <InputBox>
             <Box>
               <Label>이미지</Label>
-              <Input type="file" ref={image} />
+              <Input type="file" ref={imageRef} />
             </Box>
             <Box>
               <Label>품종</Label>
-              <Input type="text" ref={breeds} />
+              <Input type="text" ref={breedsRef} />
             </Box>
             <Box>
               <Label>나이</Label>
-              <Input type="text" ref={age} />
+              <Input type="text" ref={ageRef} />
             </Box>
             <Box>
               <Label>설명</Label>
-              <Input type="text" ref={description} />
+              <Input type="text" ref={descriptionRef} />
             </Box>
             <Box>
               <Label>이름</Label>
-              <Input type="text" ref={name} />
+              <Input type="text" ref={nameRef} />
             </Box>
             <Box>
               <Button type="submit">추가하기</Button>

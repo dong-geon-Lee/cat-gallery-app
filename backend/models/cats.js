@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const catSchema = new mongoose.Schema({
-  breeds: { type: String, required: true },
-  age: { type: Number, required: true },
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  image: { type: String, required: true },
+  breeds: { type: String },
+  age: { type: Number },
+  name: { type: String },
+  description: { type: String },
+  image: { type: String },
 });
 
 module.exports = mongoose.model("Cat", catSchema);
