@@ -11,6 +11,7 @@ const App: React.FC = () => {
 
   if (isLoading) return <h1>Loading...</h1>;
   if (isError) return <h1>{error.message}</h1>;
+
   // const baseUrl = process.env.REACT_APP_BASEURL;
 
   // const fetchData = async () => {
