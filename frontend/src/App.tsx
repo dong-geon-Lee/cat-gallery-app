@@ -26,7 +26,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {catItems?.map((catItem) => (
+      {/* {catItems?.map((catItem) => (
         <div key={catItem._id}>
           <img src={catItem.image} />
           <h2>{catItem.breeds}</h2>
@@ -34,7 +34,8 @@ const App: React.FC = () => {
           <h2>{catItem.name}</h2>
           <p>{catItem.description}</p>
         </div>
-      )) || []}
+      )) || []} */}
+      <h1>Hello World 목표는 데이터 받아오기</h1>
     </div>
   );
 };
