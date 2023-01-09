@@ -214,7 +214,7 @@ const App: React.FC = () => {
         </Form>
 
         <CardBox>
-          {data?.map((catItem, index) => (
+          {data?.map((catItem: catProps, index) => (
             <Card key={catItem._id}>
               <CatIndex>
                 {index + 1 < 10 ? `0${index + 1}` : index + 1}
