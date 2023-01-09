@@ -12,7 +12,7 @@ const App: React.FC = () => {
 
   const fetchData = async () => {
     const response = await axios.get(`${url}/api/cats`, {
-      // withCredentials: true,
+      withCredentials: true,
     });
     const data = response.data;
 
@@ -27,16 +27,15 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {catItems &&
-        catItems.map((catItem) => (
-          <div key={catItem._id}>
-            <img src={catItem.image} />
-            <h2>{catItem.breeds}</h2>
-            <h2>{catItem.age}</h2>
-            <h2>{catItem.name}</h2>
-            <p>{catItem.description}</p>
-          </div>
-        ))}
+      {catItems.map((catItem) => (
+        <div key={catItem._id}>
+          <img src={catItem.image} />
+          <h2>{catItem.breeds}</h2>
+          <h2>{catItem.age}</h2>
+          <h2>{catItem.name}</h2>
+          <p>{catItem.description}</p>
+        </div>
+      )) || []}
     </div>
   );
 };
