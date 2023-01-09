@@ -1,4 +1,4 @@
-export interface catDataProps {
+export interface catProps {
   _id: string;
   breeds: string;
   age: number;
