@@ -9,7 +9,7 @@ connectedDB();
 
 const app = express();
 const port = process.env.PORT || 8000;
-const corsOption = { credentials: true, origin: "*" };
+const corsOption = { credentials: true, origin: true };
 
 app.use(cors(corsOption));
 app.use(express.json());

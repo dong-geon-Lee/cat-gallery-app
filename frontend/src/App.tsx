@@ -4,13 +4,16 @@ import { catItemState } from "./atoms/catItemState";
 import { useRecoilState } from "recoil";
 import { catDataProps } from "./@types/types";
 
+// axios.defaults.withCredentials = true;
 const App: React.FC = () => {
   const [catItems, setCatItems] = useRecoilState<catDataProps[]>(catItemState);
 
   const url: any = process.env.REACT_APP_URL;
 
   const fetchData = async () => {
-    const response = await axios.get(url);
+    const response = await axios.get(`${url}/api/cats`, {
+      // withCredentials: true,
+    });
     const data = response.data;
 
     setCatItems(data);
