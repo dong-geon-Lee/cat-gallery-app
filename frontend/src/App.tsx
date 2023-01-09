@@ -8,7 +8,9 @@ const App: React.FC = () => {
   const [catItems, setCatItems] = useRecoilState<catDataProps[]>(catItemState);
 
   const fetchData = async () => {
-    const response = await axios.get("http://localhost:5000/api/cats");
+    const response = await axios.get("http://localhost:5000/api/cats", {
+      withCredentials: true,
+    });
     const data = response.data;
 
     setCatItems(data);
@@ -22,15 +24,16 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {catItems.map((catItem) => (
-        <div key={catItem._id}>
-          <img src={catItem.image} />
-          <h2>{catItem.breeds}</h2>
-          <h2>{catItem.age}</h2>
-          <h2>{catItem.name}</h2>
-          <p>{catItem.description}</p>
-        </div>
-      ))}
+      {catItems &&
+        catItems.map((catItem) => (
+          <div key={catItem._id}>
+            <img src={catItem.image} />
+            <h2>{catItem.breeds}</h2>
+            <h2>{catItem.age}</h2>
+            <h2>{catItem.name}</h2>
+            <p>{catItem.description}</p>
+          </div>
+        ))}
     </div>
   );
 };
