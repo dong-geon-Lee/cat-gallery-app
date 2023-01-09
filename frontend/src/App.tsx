@@ -7,12 +7,15 @@ import { catDataProps } from "./@types/types";
 const App: React.FC = () => {
   const [catItems, setCatItems] = useRecoilState<catDataProps[]>(catItemState);
 
-  const url: any = process.env.REACT_APP_URL;
+  const url = process.env.REACT_APP_URL;
 
   const fetchData = async () => {
-    const response = await axios.get(`${url}/api/cats`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(
+      `https://cat-gallery-backend.onrender.com/api/cats`,
+      {
+        withCredentials: true,
+      }
+    );
     const data = response.data;
 
     setCatItems(data);
