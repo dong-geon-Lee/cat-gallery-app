@@ -7,10 +7,7 @@ const axiosOption = {
 };
 
 export const fetchCatData = async () => {
-  const response = await axios.get(
-    `http://localhost:5000/api/cats`,
-    axiosOption
-  );
+  const response = await axios.get(`${baseUrl}/api/cats`, axiosOption);
   return response.data;
 };
 
