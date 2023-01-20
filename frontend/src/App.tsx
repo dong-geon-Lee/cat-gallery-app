@@ -152,12 +152,6 @@ const App: React.FC = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // const imageInput = image;
-    // const breedsInput = breeds;
-    // const ageInput = age;
-    // const nameInput = name;
-    // const descriptionInput = description;
-
     const formData = new FormData();
 
     formData.append("image", image);
