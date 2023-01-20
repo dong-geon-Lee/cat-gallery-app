@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const baseUrl = process.env.REACT_APP_BASEURL;
+
 const axiosOption = {
   withCredentials: true,
   headers: { "Content-Type": "multipart/form-data" },
