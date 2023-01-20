@@ -15,7 +15,6 @@ const addCats = async (req, res) => {
     description,
   });
 
-  console.log(cat, "생성 성공!");
   const catData = await cat.save();
   res.status(201).json(catData);
 };

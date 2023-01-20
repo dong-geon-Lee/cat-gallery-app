@@ -141,26 +141,12 @@ const App: React.FC = () => {
     const nameInput = nameRef.current?.value;
     const descriptionInput = descriptionRef.current?.value;
 
-    const formData: any = new FormData();
-
-    formData.append("image", imageInput);
-    formData.append("breeds", breedsInput);
-    formData.append("age", ageInput);
-    formData.append("name", nameInput);
-    formData.append("description", descriptionInput);
-
-    const image = formData.get("image");
-    const breeds = formData.get("breeds");
-    const age = formData.get("age");
-    const name = formData.get("name");
-    const description = formData.get("description");
-
     addCatData({
-      image,
-      breeds,
-      age,
-      name,
-      description,
+      image: imageInput,
+      breeds: breedsInput,
+      age: ageInput,
+      name: nameInput,
+      description: descriptionInput,
     });
   };
 
@@ -176,7 +162,7 @@ const App: React.FC = () => {
   return (
     <Container>
       <Wrapper>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} encType="multipart/form-data" method="post">
           <Title>고양이 갤러리</Title>
           <InputBox>
             <Box>
