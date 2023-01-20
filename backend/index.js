@@ -15,8 +15,12 @@ const corsOption = { credentials: true, origin: true };
 app.use(cors(corsOption));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "/frontend/uploads")));
-app.use("/uploads", express.static("uploads"));
+// app.use("/uploads", express.static("uploads"));
+// app.use("/api/cats", cats);
+// app.use(express.static(path.join(__dirname, "/frontend/uploads")));
+
 app.use("/api/cats", cats);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use(express.static(path.join(__dirname, "/frontend/uploads")));
 
 app.listen(port, () => console.log(`http://localhost:${port}`));
