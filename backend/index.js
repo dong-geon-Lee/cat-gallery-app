@@ -16,6 +16,7 @@ app.use(cors(corsOption));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use(express.static(path.join(__dirname, "/frontend/uploads")));
 app.use("/api/cats", cats);
 
 app.listen(port, () => console.log(`http://localhost:${port}`));
