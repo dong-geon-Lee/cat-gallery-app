@@ -6,13 +6,14 @@ const getCats = async (_, res) => {
 };
 
 const addCats = async (req, res) => {
-  const { breeds, age, name, description, image } = req.body;
+  const { breeds, age, name, description } = req.body;
+
   const cat = new Cats({
     breeds,
     name,
     age,
-    image,
     description,
+    image: req.file.path,
   });
 
   const catData = await cat.save();

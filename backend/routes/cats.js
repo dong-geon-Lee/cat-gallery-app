@@ -1,8 +1,8 @@
-const { getCats, addCats } = require("../controllers/cats");
-
 const router = require("express").Router();
+const { getCats, addCats } = require("../controllers/cats");
+const upload = require("../middleware/multerUpload");
 
 router.get("/", getCats);
-router.post("/", addCats);
+router.post("/", upload.single("image"), addCats);
 
 module.exports = router;
