@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { catProps } from "./@types/types";
 import { addCatData, fetchCatData } from "./api/catApi";
 import { useQuery } from "react-query";
@@ -121,33 +121,54 @@ export const Box = styled.div`
 `;
 
 const App: React.FC = () => {
-  const imageRef = useRef<HTMLInputElement>(null);
-  const breedsRef = useRef<HTMLInputElement>(null);
-  const ageRef = useRef<HTMLInputElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const descriptionRef = useRef<HTMLInputElement>(null);
+  const [catInfo, setCatInfo]: any = useState({
+    image: "",
+    breeds: "",
+    age: "",
+    name: "",
+    description: "",
+  });
 
+  const { image, breeds, age, name, description } = catInfo;
   const { isLoading, isError, error, data } = useQuery<catProps[], Error>(
     "cats",
     fetchCatData
   );
 
+  const imageOnchange = (e: any) => {
+    setCatInfo((prevState: any) => ({
+      ...prevState,
+      image: e.target.files[0],
+    }));
+  };
+
+  const onChange = (e: any) => {
+    setCatInfo((prevState: any) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const imageInput = imageRef.current?.files?.[0];
-    const breedsInput = breedsRef.current?.value;
-    const ageInput = ageRef.current?.value;
-    const nameInput = nameRef.current?.value;
-    const descriptionInput = descriptionRef.current?.value;
+    // const imageInput = image;
+    // const breedsInput = breeds;
+    // const ageInput = age;
+    // const nameInput = name;
+    // const descriptionInput = description;
 
-    addCatData({
-      image: imageInput,
-      breeds: breedsInput,
-      age: ageInput,
-      name: nameInput,
-      description: descriptionInput,
-    });
+    const formData = new FormData();
+
+    formData.append("image", image);
+    formData.append("breeds", breeds);
+    formData.append("age", age);
+    formData.append("name", name);
+    formData.append("description", description);
+
+    addCatData(formData);
+
+    // setCatInfo("");
   };
 
   const handleClick = (e: React.FormEvent) => {
@@ -167,23 +188,52 @@ const App: React.FC = () => {
           <InputBox>
             <Box>
               <Label>이미지</Label>
-              <Input type="file" ref={imageRef} />
+              <Input
+                type="file"
+                name="image"
+                accept=".png, .jpg, .jpeg"
+                onChange={imageOnchange}
+              />
             </Box>
             <Box>
               <Label>품종</Label>
-              <Input type="text" ref={breedsRef} />
+              <Input
+                type="text"
+                name="breeds"
+                value={breeds}
+                onChange={onChange}
+                placeholder="품종"
+              />
             </Box>
             <Box>
               <Label>나이</Label>
-              <Input type="text" ref={ageRef} />
+              <Input
+                type="text"
+                name="age"
+                value={age}
+                onChange={onChange}
+                placeholder="나이"
+              />
             </Box>
             <Box>
               <Label>설명</Label>
-              <Input type="text" ref={descriptionRef} />
+              <Input
+                type="text"
+                name="description"
+                value={description}
+                onChange={onChange}
+                placeholder="설명"
+              />
             </Box>
             <Box>
               <Label>이름</Label>
-              <Input type="text" ref={nameRef} />
+              <Input
+                type="text"
+                name="name"
+                value={name}
+                onChange={onChange}
+                placeholder="이름"
+              />
             </Box>
             <Box>
               <Button type="submit">추가하기</Button>
@@ -201,7 +251,7 @@ const App: React.FC = () => {
                 {index + 1 < 10 ? `0${index + 1}` : index + 1}
               </CatIndex>
               <ImgBox>
-                <Img src={catItem.image} />
+                <Img src={`http://localhost:5000/${catItem.image}`} />
               </ImgBox>
               <CatContents>
                 <CatTypes className="cat__types">{catItem.breeds}</CatTypes>
