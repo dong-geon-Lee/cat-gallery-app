@@ -1,7 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const path = require("path");
 const connectedDB = require("./config/database");
 const cats = require("./routes/cats");
 
@@ -17,7 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/cats", cats);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use(express.static(path.join(__dirname, "/frontend/uploads")));
+app.use("/uploads", express.static("uploads"));
 
 app.listen(port, () => console.log(`http://localhost:${port}`));
