@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { catProps } from "./@types/types";
-import { addCatData, fetchCatData } from "./api/catApi";
+import { addCatData, baseUrl, fetchCatData } from "./api/catApi";
 import { useQuery } from "react-query";
 import styled from "styled-components";
 
@@ -251,7 +251,7 @@ const App: React.FC = () => {
                 {index + 1 < 10 ? `0${index + 1}` : index + 1}
               </CatIndex>
               <ImgBox>
-                <Img src={`http://localhost:5000/${catItem.image}`} />
+                <Img src={`${baseUrl}/${catItem.image}`} />
               </ImgBox>
               <CatContents>
                 <CatTypes className="cat__types">{catItem.breeds}</CatTypes>

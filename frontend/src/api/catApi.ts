@@ -14,11 +14,7 @@ export const fetchCatData = async () => {
 export const addCatData = async (data: any) => {
   try {
     console.log(data, "과정");
-    const response = await axios.post(
-      `http://localhost:5000/api/cats`,
-      data,
-      axiosOption
-    );
+    const response = await axios.post(`${baseUrl}/api/cats`, data, axiosOption);
     console.log(response.data, "결과");
     return response.data;
   } catch (error) {
