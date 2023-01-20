@@ -3,8 +3,6 @@ import { catProps } from "./@types/types";
 import { addCatData, fetchCatData } from "./api/catApi";
 import { useQuery } from "react-query";
 import styled from "styled-components";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { catItemState } from "./recoil/catItemState";
 
 export const Container = styled.div`
   padding: 5rem;
@@ -133,9 +131,6 @@ const App: React.FC = () => {
     "cats",
     fetchCatData
   );
-
-  // const catItems = useRecoilValue(catItemState);
-  // const setCatItems = useSetRecoilState(catItemState);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
