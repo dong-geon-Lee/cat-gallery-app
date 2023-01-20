@@ -149,7 +149,7 @@ const App: React.FC = () => {
     }));
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // const imageInput = image;
@@ -166,7 +166,7 @@ const App: React.FC = () => {
     formData.append("name", name);
     formData.append("description", description);
 
-    addCatData(formData);
+    await addCatData(formData);
 
     // setCatInfo("");
   };
