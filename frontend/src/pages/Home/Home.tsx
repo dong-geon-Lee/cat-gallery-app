@@ -70,6 +70,7 @@ const Home = () => {
           <img
             src={`${process.env.REACT_APP_BASEURL}/${item.image}`}
             alt={item._id}
+            style={{ width: "20rem", height: "20rem" }}
           />
           <h1>{item.age}</h1>
           <h1>{item.breeds}</h1>
