@@ -4,27 +4,22 @@ const GlobalStyle = createGlobalStyle`
   * {
     margin: 0; 
     padding: 0; 
-    box-sizing: inherit;
+    box-sizing: border-box;
   }
 
   html {
     font-size: 62.5%;
-    box-sizing: border-box;
     overflow-x: hidden;
   }
 
   body {
-    font-family: 'Questrial', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     line-height: 1.5;
+    position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    background-color: #000;
-    color: #fff;
+    background-color: #f8f8f8;
   }
 
   input, button {
