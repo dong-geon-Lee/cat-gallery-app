@@ -14,10 +14,6 @@ const CreateCatImage = () => {
   });
 
   const { image, breeds, age, name, description } = catInfo;
-  const { isLoading, isError, error, data } = useQuery<catProps[], Error>(
-    "cats",
-    fetchCatData
-  );
 
   const imageOnchange = (e: any) => {
     setCatInfo((prevState: any) => ({
@@ -50,12 +46,6 @@ const CreateCatImage = () => {
   const handleClick = (e: React.FormEvent) => {
     console.log("나가기");
   };
-
-  if (isLoading) return <h1>Loading...</h1>;
-  if (isError) return <h1>{error.message}</h1>;
-
-  console.log(data);
-  console.log(catInfo);
 
   return (
     <Form onSubmit={onSubmit} encType="multipart/form-data" method="post">

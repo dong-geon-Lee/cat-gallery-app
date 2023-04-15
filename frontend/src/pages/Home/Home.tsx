@@ -15,8 +15,19 @@ import fishs from "../../assets/fish.svg";
 import horses from "../../assets/horses.svg";
 import reptiles from "../../assets/reptiles.svg";
 import hearts from "../../assets/hearts.svg";
+import { useQuery } from "react-query";
+import { catProps } from "../../@types/types";
+import { fetchCatData } from "../../api/catApi";
 
 const Home = () => {
+  const { isLoading, isError, error, data } = useQuery<catProps[], Error>(
+    "cats",
+    fetchCatData
+  );
+
+  if (isLoading) return <h1>Loading...</h1>;
+  if (isError) return <h1>{error.message}</h1>;
+
   return (
     <Container>
       <Header>
@@ -53,6 +64,20 @@ const Home = () => {
           <Button>Ask a Vet</Button>
         </BtnBox>
       </Header>
+
+      {data?.map((item: catProps) => (
+        <div key={item._id}>
+          <img
+            src={item.image}
+            alt={item._id}
+            style={{ width: "20rem", height: "20rem" }}
+          />
+          <h1>{item.age}</h1>
+          <h1>{item.breeds}</h1>
+          <h2>{item.description}</h2>
+          <h2>{item.name}</h2>
+        </div>
+      ))}
     </Container>
   );
 };
